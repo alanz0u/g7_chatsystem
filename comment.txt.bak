@@ -1,0 +1,26 @@
+Group 7:
+
+1. Missing user authentication
+2. Static RSA key with symmetric AES encryption - key management
+3. Malfunction of 'quit' command in chatting mode (the program turns out to broadcast 'quit' instead of quit the chat system)
+4. Cannot handle undefined command starting with forward slash (/), which causes frequent crashes of the client
+5. The message to be encrypted is not checked and an empty input will raise an error in the padding module and further cause server shutdown.
+6. In the backdoor challenge mode, the system function 'exec' is used to execute remote code, where the built-ins are restricted with a dictionary filter applied to the input string. However, this can still be very dangerous since the filter might be bypassed to execute malicious code.
+
+
+There are 5 CTF Style backdoors in the server.py:
+1. This backdoor allows user to execute Python code including print function. The output of Python code will be displayed on server prompt
+2. This backdoor allows user to echo a message "Oh hacker!" to the client prompt if the input length is more than 7 bytes
+3. This backdoor allows user to execute Python code including print function
+4. 
+5. This backdoor allows user to execute Python code remotely
+
+Group 3:
+
+1. In the server.py Line 9, a function get_wlan_ip() is used to automatically retrieve the WLAN IP address from system information. It is definitely a good point to simplify the initialisation of server or cliet configuration. However, if the chat system is deployed on a platform using wired ethernet Interface only, this function will fail and raise an error.
+
+
+Code Practice
+1. In the server.py Line 24, another variable named 'config' is re-defined within the scope of function load_config(), making it inaccessible and might confuse.
+2. In the server.py Line 85, there is an unnecessary f-string used without any expression. It is recommended to use regular print if no expresssions to be extrapolated.
+3. In the client.py Line 153, bare 'except' is used to catch the decryption error raised by rsa function. It is highly recommended to use a specific exception statement.
